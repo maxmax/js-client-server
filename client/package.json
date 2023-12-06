@@ -16,7 +16,8 @@
     "dayjs": "^1.11.10",
     "mobx-react": "^9.1.0",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-router-dom": "^6.20.1"
   },
   "devDependencies": {
     "@types/react": "latest",

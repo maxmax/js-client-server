@@ -1,5 +1,6 @@
 import * as React from 'react';
 import dayjs from 'dayjs';
+import { Link } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -11,9 +12,11 @@ interface BasicCardProps {
   createdAt: string;
   title: string;
   description: string;
+  editTutorial: Function;
+  deleteTutorial: Function;
 }
 
-export default function BasicCard({ id, createdAt, title, description }: BasicCardProps) {
+export default function TutorialCard({ id, createdAt, title, description, editTutorial, deleteTutorial }: BasicCardProps) {
   return (
     <Card sx={{ minWidth: 275, m: 1 }}>
       <CardContent>
@@ -28,7 +31,10 @@ export default function BasicCard({ id, createdAt, title, description }: BasicCa
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button component={Link} to={'/tutorials/' + id} size="small">Learn More</Button>
+        {/* For Current user post */}
+        <Button onClick={() => editTutorial(id)} size="small">Edit</Button>
+        <Button onClick={() => deleteTutorial(id)} size="small" color="error">Delete</Button>
       </CardActions>
     </Card>
   );
