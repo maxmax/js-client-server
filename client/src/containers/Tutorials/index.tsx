@@ -17,21 +17,7 @@ import TutorialCard from './components/TutorialCard';
 import TutorialNew from './components/TutorialNew';
 import TutorialEdit from './components/TutorialEdit';
 
-interface TutorialProps {
-  id: number;
-  createdAt: string;
-  title: string;
-  description: string;
-}
-
-interface TutorialsStoreProps {
-  state: string;
-  tutorialsData: TutorialProps[];
-  getTutorials: Function;
-  deleteTutorial: Function;
-  createTutorial: Function;
-  notifications: string;
-}
+import { TutorialsStoreProps } from './types';
 
 interface TutorialsProps {
   tutorialsStore: TutorialsStoreProps;
@@ -52,9 +38,11 @@ function Tutorials({ tutorialsStore }: TutorialsProps) {
   const [tutorialEditOpen, setTutorialEditOpen] = useState(null);
   const [tutorialNewOpen, setTutorialNewOpen] = useState(false);
 
+  // this to hook
   useEffect(() => {
-    !tutorialsData[0] && getTutorials();
-  }, [tutorialsData, getTutorials]);
+    const currentState = state === "done" || state === "error";
+    !currentState && getTutorials();
+  }, [tutorialsData, getTutorials, state]);
 
   if (!!notifications) {
     console.log('notifications:', notifications)
@@ -73,8 +61,8 @@ function Tutorials({ tutorialsStore }: TutorialsProps) {
           </ButtonGroup>
         </Box>
         <Box sx={{ display: 'grid', minHeight: '70vh', alignItems: 'center', justifyContent: 'center' }}>
-          {!tutorialsData[0] && state === "pending" && ( <CircularProgress /> )}
-          {tutorialsData[0] && state === "done" && tutorialsData?.map((item, i) => (
+          {!tutorialsData?.length && state === "pending" && ( <CircularProgress /> )}
+          {tutorialsData?.length && state === "done" && tutorialsData?.map((item, i) => (
             <TutorialCard
               key={`${i}-tutorialsData`}
               {...item}

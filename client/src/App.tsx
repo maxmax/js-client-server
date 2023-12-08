@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Tutorials from './containers/Tutorials';
 import Tutorial from './containers/Tutorials/Tutorial';
 
+// Routes to connected-react-router
 export default function App() {
   return (
     <Provider { ...stores }>

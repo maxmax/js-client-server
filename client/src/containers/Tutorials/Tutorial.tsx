@@ -11,17 +11,12 @@ import {
 } from '@mui/material';
 import Footer from '../../components/Footer';
 
-interface TutorialProps {
-  id: number;
-  createdAt: string;
-  title: string;
-  description: string;
-}
+import { TutorialProps } from './types';
 
 interface TutorialsStoreProps {
   state: string;
-  tutorialsData: TutorialProps[];
-  getTutorials: Function;
+  tutorialData: TutorialProps;
+  getTutorial: Function;
 }
 
 interface TutorialsProps {
